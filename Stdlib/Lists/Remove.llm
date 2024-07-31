@@ -1,0 +1,7 @@
+cell = !Cell .
+
+'remove [
+    | (cell %x %lst) %x %lst #
+    | (cell %x1 %lst1) %x (cell %x1 %lst2) # @ %lst1 %x %lst2
+]
+

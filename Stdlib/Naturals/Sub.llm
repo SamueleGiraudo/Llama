@@ -1,0 +1,6 @@
+add = !Add .
+
+'sub [
+    | %n1 %n2 %n3 # add %n2 %n3 %n1
+]
+

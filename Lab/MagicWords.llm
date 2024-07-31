@@ -1,0 +1,106 @@
+eq = !Predicates/Eq .
+
+0 = !Naturals/Numbers/0 .
+1 = !Naturals/Numbers/1 .
+2 = !Naturals/Numbers/2 .
+3 = !Naturals/Numbers/3 .
+4 = !Naturals/Numbers/4 .
+5 = !Naturals/Numbers/5 .
+6 = !Naturals/Numbers/6 .
+10 = !Naturals/Numbers/10 .
+succ = !Naturals/Succ .
+
+empty = !Lists/Empty .
+cell = !Lists/Cell .
+append = !Lists/Append .
+map = !Lists/Map .
+
+rule = 'rule .
+puzzle = 'puzzle .
+
+rewrite_prefix_by_rule =
+    'rewrite_prefix_by_rule [
+        | (rule %u1 %u2) %w1 %w2 # append %u1 %w %w1 & append %u2 %w %w2
+    ]
+.
+
+rewrite_factor_by_rule =
+    'rewrite_factor_by_rule [
+        | %rule %w1 %w2 # rewrite_prefix_by_rule %rule %w1 %w2
+        | %rule (cell %a %w1) (cell %a %w2) # @ %rule %w1 %w2
+    ]
+.
+
+rewrite =
+    'rewrite [
+        | (cell %rule %rules) %w1 %w2 # rewrite_factor_by_rule %rule %w1 %w2
+        | (cell %rule %rules) %w1 %w2 # @ %rules %w1 %w2
+
+    ]
+.
+
+connecting_path =
+    'connecting_path [
+        | %rules 0 %w (cell %w empty) %w #
+        | %rules (succ %len) %w1 (cell %w1 %path) %w2 #
+            rewrite %rules %w1 %w3
+            & @ %rules %len %w3 %path %w2
+    ]
+.
+
+solution =
+    'solution [
+        | %puzzle %len %solution #
+        eq (puzzle %rules %w) %puzzle
+        & connecting_path %rules %len %w %solution empty
+    ]
+.
+
+
+reverse_rule =
+    'reverse_rule [
+        | (rule %w1 %w2) (rule %w2 %w1) #
+    ]
+.
+
+reverse_rules =
+    'reverse_rules [
+        | %rules_1 %rules_2 # map reverse_rule %rules_1 %rules_2
+    ]
+.
+
+magic_word =
+    'magic_word [
+        | %rules %len %w #
+            reverse_rules %rules %rules_rev
+            & connecting_path %rules_rev %len empty %path %w
+
+    ]
+.
+
+
+'main [
+    | %solution #
+        eq %w_ empty
+        & eq %w_1 (cell 1 empty)
+        & eq %w_11 (cell 1 (cell 1 empty))
+        & eq %w_12 (cell 1 (cell 2 empty))
+        & eq %w_21 (cell 2 (cell 1 empty))
+        & eq %w_212 (cell 2 (cell 1 (cell 2 empty)))
+        & eq %w_1211 (cell 1 (cell 2 (cell 1 (cell 1 empty))))
+
+        & eq %rule_1 (rule %w_11 %w_1)
+        & eq %rule_2 (rule %w_12 %w_212)
+        & eq %rule_3 (rule %w_21 %w_)
+
+        & eq %rules_123 (cell %rule_1 (cell %rule_2 (cell %rule_3 empty)))
+
+        & eq %puzzle_A (puzzle %rules_123 %w_1211)
+
+        {& rewrite %rules_123 %w_1211 %w}
+        {& connecting_path %rules_123 4 %word %path %w_}
+        {& solution %puzzle_A 4 %solution}
+        & magic_word %rules_123 3 %solution
+]
+%solution
+

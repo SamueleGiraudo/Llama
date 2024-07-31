@@ -1,0 +1,7 @@
+prefix = !Prefix .
+suffix = !Suffix .
+
+'factor [
+    | %lst1 %lst2 # suffix %lst3 %lst2 & prefix %lst1 %lst3
+]
+

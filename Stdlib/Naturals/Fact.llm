@@ -1,0 +1,9 @@
+0 = !Zero .
+1 = !Numbers/1 .
+succ = !Succ .
+
+'fact [
+    | 0 1 #
+    | (succ %n1) %n2 # @ %n1 %n3 & !Mul (succ %n1) %n3 %n2
+]
+

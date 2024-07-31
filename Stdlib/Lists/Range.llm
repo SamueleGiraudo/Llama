@@ -1,0 +1,10 @@
+empty = !Empty .
+cell = !Cell .
+succ = !../Naturals/Succ .
+lt = !../Naturals/Lt .
+
+'range [
+    | %n %n (cell %n empty) #
+    | %n1 %n2 (cell %n1 %lst) # lt %n1 %n2 & @ (succ %n1) %n2 %lst
+]
+

@@ -1,0 +1,103 @@
+fail = !../Stdlib/Predicates/Fail .
+eqq = !../Stdlib/Predicates/Eq .
+flip = !../Stdlib/Predicates/Flip .
+
+succ = !../Stdlib/Naturals/Succ .
+eq = !../Stdlib/Naturals/Eq .
+neq = !../Stdlib/Naturals/Neq .
+leq = !../Stdlib/Naturals/Leq .
+geq = !../Stdlib/Naturals/Geq .
+add = !../Stdlib/Naturals/Add .
+sub = !../Stdlib/Naturals/Sub .
+mul = !../Stdlib/Naturals/Mul .
+pow = !../Stdlib/Naturals/Pow .
+fact = !../Stdlib/Naturals/Fact .
+fibo = !../Stdlib/Naturals/Fibo .
+
+0 = !../Stdlib/Naturals/Numbers/0 .
+1 = !../Stdlib/Naturals/Numbers/1 .
+2 = !../Stdlib/Naturals/Numbers/2 .
+3 = !../Stdlib/Naturals/Numbers/3 .
+4 = !../Stdlib/Naturals/Numbers/4 .
+5 = !../Stdlib/Naturals/Numbers/5 .
+6 = !../Stdlib/Naturals/Numbers/6 .
+7 = !../Stdlib/Naturals/Numbers/7 .
+8 = !../Stdlib/Naturals/Numbers/8 .
+9 = !../Stdlib/Naturals/Numbers/9 .
+10 = !../Stdlib/Naturals/Numbers/10 .
+11 = succ 10 .
+12 = succ 11 .
+13 = succ 12 .
+
+empty = !../Stdlib/Lists/Empty .
+cell = !../Stdlib/Lists/Cell .
+is_empty = !../Stdlib/Lists/IsEmpty .
+head = !../Stdlib/Lists/Head .
+tail = !../Stdlib/Lists/Tail .
+range = !../Stdlib/Lists/Range .
+map = !../Stdlib/Lists/Map .
+member = !../Stdlib/Lists/Member .
+append = !../Stdlib/Lists/Append .
+prefix = !../Stdlib/Lists/Prefix .
+suffix = !../Stdlib/Lists/Suffix .
+factor = !../Stdlib/Lists/Factor .
+sublist = !../Stdlib/Lists/Sublist .
+reverse = !../Stdlib/Lists/Reverse .
+remove = !../Stdlib/Lists/Remove .
+permute = !../Stdlib/Lists/Permute .
+
+{eq 3 3}
+{eq %n1 %n2}
+{leq %n 3}
+{geq %n 3}
+{add 2 1 %n}
+{mul 2 1 %n}
+{fact 4 %n}
+{fact %n %m}
+{pow 2 10 %n}
+{pow %n1 %n2 %n3}
+fibo 9 %n
+{range 0 10 %lst}
+{is_empty empty}
+{neq 4 5}
+{sub 10 2 %n}
+{member (cell 'a (cell 'b empty)) 'b}
+{append (cell 'a (cell 'b empty)) (cell 'c (cell 'd (cell 'a empty))) %lst}
+{prefix %lst (cell 'a (cell 'b (cell 'c (cell 'b empty))))}
+{prefix (cell 'a (cell 'b (cell 'c (cell 'b empty)))) %lst}
+{suffix %lst (cell 'a (cell 'b (cell 'c (cell 'b empty))))}
+{suffix (cell 'a (cell 'b (cell 'c (cell 'b %lst1)))) %lst2}
+{suffix (cell 'a (cell 'b (cell 'c (cell 'b empty)))) %lst2}
+{factor %lst (cell 'a (cell 'b (cell 'c (cell 'b empty))))}
+{sublist %lst (cell 'a (cell 'c (cell 'b empty))) %lst}
+{sublist (cell 'a (cell 'c (cell 'b empty))) %lst}
+{reverse (cell 'c (cell 'a (cell 'a (cell 'c (cell 'b empty))))) %lst}
+{remove (cell 'c (cell 'a (cell 'a (cell 'c (cell 'b empty))))) 'c %lst}
+{permute (cell 'a (cell 'b (cell 'c empty))) %lst}
+{permute %lst (cell 'a (cell 'b (cell 'c empty)))}
+
+{
+main =
+    'main [
+        | #
+            range 0 10 %lst1
+            & map fibo %lst1 %lst2
+            & member %lst2 8
+    ]
+.
+main
+}
+
+
+
+{
+main =
+    'main [
+        |%n1 #
+            add 2 2 %n2 & fibo %n2 %n1
+    ]
+.
+main %n1
+}
+
+

@@ -1,0 +1,5 @@
+'pow [
+    | %n !Zero !Numbers/1 #
+    | %n1 (!Succ %n2) %n3 # @ %n1 %n2 %n4 & !Mul %n1 %n4 %n3
+]
+

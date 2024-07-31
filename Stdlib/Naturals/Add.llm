@@ -1,0 +1,5 @@
+'add [
+    | !Zero %n %n #
+    | (!Succ %n1) %n2 (!Succ %n3) # @ %n1 %n2 %n3
+]
+

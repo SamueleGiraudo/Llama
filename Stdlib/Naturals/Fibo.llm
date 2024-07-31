@@ -1,0 +1,12 @@
+0 = !Zero .
+1 = !Numbers/1 .
+2 = !Numbers/2 .
+succ = !Succ .
+add = !Add .
+
+'fibo [
+    | 0 1 #
+    | 1 1 #
+    | (succ (succ %n1)) %n2 # @ (succ %n1) %n3 & @ %n1 %n4 & add %n4 %n3 %n2
+]
+

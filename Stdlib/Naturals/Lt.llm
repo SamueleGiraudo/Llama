@@ -1,0 +1,8 @@
+0 = !Zero .
+succ = !Succ .
+
+'lt [
+    | 0 (succ %n) #
+    | (succ %n1) (succ %n2) # @ %n1 %n2
+]
+

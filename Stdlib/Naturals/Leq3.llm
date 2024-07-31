@@ -1,0 +1,6 @@
+leq = !Leq .
+
+'leq_3 [
+    | %n1 %n2 %n3 # leq %n1 %n2 & leq %n2 %n3
+]
+

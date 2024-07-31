@@ -1,0 +1,4 @@
+'head [
+    | (!Cell %x %lst) %x #
+]
+

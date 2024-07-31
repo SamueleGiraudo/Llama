@@ -1,0 +1,25 @@
+tom = 'tom .
+tim = 'tim .
+tam = 'tam .
+tat = 'tat .
+tut = 'tut .
+tob = 'tob .
+
+child =
+    'child [
+        | tom tim #
+        | tom tam #
+        | tam tat #
+        | tam tut #
+        | tut tob #
+    ]
+.
+
+grand_parent =
+    'grand_parent [
+        | %x1 %x2 # child %x1 %x3 & child %x3 %x2
+    ]
+.
+
+grand_parent %1 %2
+

@@ -1,0 +1,7 @@
+cell = !Cell .
+
+'member [
+    | (cell %x %lst) %x #
+    | (cell %x1 %lst) %x2 # @ %lst %x2
+]
+

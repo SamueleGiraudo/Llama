@@ -1,0 +1,6 @@
+append = !Append .
+
+'prefix [
+    | %lst1 %lst2 # append %lst1 %lst3 %lst2
+]
+

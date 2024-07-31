@@ -1,0 +1,4 @@
+'tail [
+    | (!Cell %x %lst) %lst #
+]
+

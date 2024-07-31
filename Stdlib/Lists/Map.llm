@@ -1,0 +1,8 @@
+empty = !Empty .
+cell = !Cell .
+
+'map [
+    | %f empty empty #
+    | %f (cell %x1 %lst1) (cell %x2 %lst2) # %f %x1 %x2 & @ %f %lst1 %lst2
+]
+

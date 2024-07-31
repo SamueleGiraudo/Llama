@@ -1,0 +1,8 @@
+empty = !Empty .
+cell = !Cell .
+
+'append [
+    | empty %lst %lst #
+    | (cell %x %lst1) %lst2 (cell %x %lst3) # @ %lst1 %lst2 %lst3
+]
+

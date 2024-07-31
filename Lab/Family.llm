@@ -1,0 +1,139 @@
+{
+    Example obtained (in parts) at
+    https://github.com/Anniepoo/prolog-examples/blob/master/familytree.pl
+}
+
+dicky = 'dicky .
+randy = 'randy .
+mike = 'mike .
+don = 'don .
+elmer = 'elmer .
+anne = 'anne .
+rosie = 'rosie .
+esther = 'esther .
+mildred = 'mildred .
+greatgramma = 'greatgramma .
+blair = 'blair .
+god = 'god .
+
+male =
+    'male [
+        | dicky #
+        | randy #
+        | mike #
+        | don #
+        | elmer #
+        | blair #
+        | god #
+    ]
+.
+
+female =
+    'female [
+        | anne #
+        | rosie #
+        | esther #
+        | mildred #
+        | greatgramma #
+        | god #
+    ]
+.
+
+parent =
+    'parent [
+        | don randy #
+        | don mike #
+        | don anne #
+        | rosie randy #
+        | rosie mike #
+        | rosie anne #
+        | elmer don #
+        | mildred don #
+        | esther rosie #
+        | esther dicky #
+        | greatgramma esther #
+        | randy blair #
+    ]
+.
+
+{
+american =
+    'american [
+        | anne #
+        | %x # ancestor %x anne
+        | %x # ancestor anne %x
+    ]
+.
+}
+
+father =
+    'father [
+        | %father %child # male %father & parent %father %child
+    ]
+.
+
+mother =
+    'mother [
+        | %mother %child # female %mother & parent %mother %child
+    ]
+.
+
+son =
+    'son [
+        | %son %parent # male %son & parent %parent %son
+    ]
+.
+
+daughter =
+    'daughter [
+        | %daughter %parent # female %daughter & parent %parent %daughter
+    ]
+.
+
+grandfather =
+    'grandfather [
+        | %grandfather %grandchild #
+            male %grandfather
+            & parent %grandfather %father
+            & parent %father %grandchild
+    ]
+.
+
+grandmother =
+    'grandmother [
+        | %grandmother %grandchild #
+            female %grandmother
+            & parent %grandmother %mother
+            & parent %mother %grandchild
+    ]
+.
+
+ancestor =
+    'ancestor [
+        | %ancestor %descendant # parent %ancestor %descendant
+        | %ancestor %descendant # parent %ancestor %child & @ %child %descendant
+    ]
+.
+
+descendant =
+    'descendant [
+        | %descendant %ancestor # ancestor %ancestor %descendant
+    ]
+.
+
+relatives =
+    'relatives [
+        | %person_1 %person_2 # ancestor %person_1 %person_2
+        | %person_1 %person_2 # descendant %person_1 %person_2
+        | %person_1 %person_2 #
+            ancestor %common_ancestor %person_1 & ancestor %common_ancestor %person_2
+    ]
+.
+
+{grandmother %x %y}
+{ancestor elmer %x}
+{descendant rosie %x}
+{relatives %x %y}
+{relatives %x elmer}
+relatives %x anne
+
